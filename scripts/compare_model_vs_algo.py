@@ -73,11 +73,11 @@ def run_comparison(crate=1.0, k_fit=100, save_plot=True):
 
     print("=" * 80)
     print(f"COMPARISON: Physics DFN Model vs Algorithm at {tag}")
-    print(f"Algorithm fitted on first {k_fit} cycles → "
+    print(f"Algorithm fitted on first {k_fit} cycles -> "
           f"Extrapolated to {len(N_true)} cycles")
     print("=" * 80)
     header = (f"{'Cycle':>7} | {'Model Q [Ah]':>13} | {'Algo Q [Ah]':>13} | "
-              f"{'Δ [Ah]':>11} | {'SOH Model':>10} | {'SOH Algo':>10} | "
+              f"{'Delta [Ah]':>11} | {'SOH Model':>10} | {'SOH Algo':>10} | "
               f"{'Error [%]':>9}")
     print(header)
     print("-" * 80)
@@ -97,7 +97,7 @@ def run_comparison(crate=1.0, k_fit=100, save_plot=True):
     sup_err = np.max(np.abs(soh_algo[ext_mask] - soh_true[ext_mask])) * 100
     print(f"Worst-case extrapolation error on cycles > {k_fit}: "
           f"{sup_err:.3f}% SOH")
-    print(f"Equation: SOH(N) = {c:.6f} − ({b1:.6e})·√N − ({b2:.6e})·N")
+    print(f"Equation: SOH(N) = {c:.6f} - ({b1:.6e})*sqrt(N) - ({b2:.6e})*N")
     print("=" * 80)
 
     # 4. Plot
@@ -122,7 +122,7 @@ def run_comparison(crate=1.0, k_fit=100, save_plot=True):
         plt.tight_layout()
         plt.savefig(out_png, dpi=140)
         plt.close()
-        print(f"Plot → {out_png}")
+        print(f"Plot -> {out_png}")
 
 
 def main():

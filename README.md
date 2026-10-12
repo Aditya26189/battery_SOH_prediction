@@ -179,9 +179,9 @@ then extrapolated to predict the remaining life.
 
 | Document | Description |
 |:---------|:-----------|
+| [`docs/MODEL_GUIDE.md`](docs/MODEL_GUIDE.md) | Model capabilities, horizon guide ($K=100$ vs $500$), and API usage |
 | [`docs/PRESENTATION.md`](docs/PRESENTATION.md) | Faculty technical presentation dossier |
 | [`docs/REPORT.md`](docs/REPORT.md) | Comprehensive 1,500-cycle pilot report |
-| [`docs/RESULTS.md`](docs/RESULTS.md) | Extrapolation benchmark tables |
 | [`docs/DECISIONS_AND_RATIONALE.md`](docs/DECISIONS_AND_RATIONALE.md) | Architecture decisions log |
 | [`docs/DIAG_REPORT.md`](docs/DIAG_REPORT.md) | Parameter ablation diagnostics |
 
