@@ -14,12 +14,8 @@ REPO_ROOT = r"c:\Users\LawLight\Desktop\battery_data_dump"
 PYTHON_EXE = sys.executable
 
 def git_commit(msg):
-    try:
-        subprocess.run(["git", "add", "pilot_1500/results/fixedset_1500/"], cwd=REPO_ROOT, check=True)
-        subprocess.run(["git", "commit", "-m", msg], cwd=REPO_ROOT, check=True)
-        print(f"[GIT COMMIT] Successfully committed: {msg}", flush=True)
-    except Exception as e:
-        print(f"[GIT WARNING] Git commit failed: {e}", flush=True)
+    # Auto-committing disabled per user instruction
+    return
 
 def run_crate(crate):
     tag = f"{crate:g}C"

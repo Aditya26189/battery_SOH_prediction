@@ -13,26 +13,49 @@ MILESTONES = [50, 100, 200, 500, 1000, 1500]
 
 def forms():
     one = lambda n: np.ones_like(n)
-    lin = {"sqrtN": lambda n: np.column_stack([one(n), np.sqrt(n)]),
-           "N": lambda n: np.column_stack([one(n), n]),
-           "sqrtN+N": lambda n: np.column_stack([one(n), np.sqrt(n), n]),
-           "logN": lambda n: np.column_stack([one(n), np.log(n)])}
+    lin = {
+        "linear": lambda n: np.column_stack([one(n), n]),
+        "sqrtN": lambda n: np.column_stack([one(n), np.sqrt(n)]),
+        "composite_two_regime": lambda n: np.column_stack([one(n), np.sqrt(n), n]),
+        "logN": lambda n: np.column_stack([one(n), np.log(n)]),
+    }
     return lin
 
 
 def fit_predict(name, N, y, ktr):
     tr = N <= ktr
+    N_tr = N[tr]
+    y_tr = y[tr]
+    one = np.ones_like
     if name == "power":                                 # y = c - b * N^p
         f = lambda n, c, b, p: c - b * n ** p
-        y0 = y[tr]
         try:
-            popt, _ = curve_fit(f, N[tr], y0, p0=[y0[0], max(1e-6, y0[0] - y0[-1]) / N[tr][-1] ** 0.7, 0.7],
+            popt, _ = curve_fit(f, N_tr, y_tr, p0=[y_tr[0], max(1e-6, y_tr[0] - y_tr[-1]) / N_tr[-1] ** 0.7, 0.7],
                                 bounds=([0.5, 0, 0.1], [1.5, 1, 2.0]), maxfev=20000)
             return f(N, *popt)
         except Exception:
             return np.full_like(N, np.nan)
+    elif name == "bilinear_two_regime":
+        # Two-regime piecewise linear model: y = c - b1*N - b2*max(0, N - Nk)
+        B_lin = np.column_stack([one(N_tr), N_tr])
+        c_lin, _, _, _ = np.linalg.lstsq(B_lin, y_tr, rcond=None)
+        best_pred = np.column_stack([one(N), N]) @ c_lin
+        best_sse = np.sum((y_tr - B_lin @ c_lin) ** 2)
+        if len(N_tr) >= 20:
+            cand_nk = np.linspace(N_tr[int(len(N_tr)*0.1)], N_tr[int(len(N_tr)*0.9)], 25)
+            for nk in cand_nk:
+                hinge_tr = np.maximum(0, N_tr - nk)
+                B_h = np.column_stack([one(N_tr), N_tr, hinge_tr])
+                c_h, _, _, _ = np.linalg.lstsq(B_h, y_tr, rcond=None)
+                sse = np.sum((y_tr - B_h @ c_h) ** 2)
+                if sse < best_sse:
+                    best_sse = sse
+                    hinge_full = np.maximum(0, N - nk)
+                    best_pred = np.column_stack([one(N), N, hinge_full]) @ c_h
+        return best_pred
+
     B = forms()[name](N)
-    a = np.linalg.lstsq(B[tr], y[tr], rcond=None)[0]
+    a = np.linalg.lstsq(B[tr], y_tr, rcond=None)[0]
     return B @ a
 
 
@@ -92,7 +115,7 @@ def main():
     t1.to_csv(os.path.join(a.out, "trajectory_summary.csv"), index=False)
 
     # ---------- table 2: hold-out extrapolation by form ----------
-    names = list(forms().keys()) + ["power"]
+    names = list(forms().keys()) + ["power", "bilinear_two_regime"]
     rec = []
     for i, c in enumerate(crates):
         for K in [k for k in KS if k < T - 10]:
