@@ -179,6 +179,7 @@ then extrapolated to predict the remaining life.
 
 | Document | Description |
 |:---------|:-----------|
+| [`docs/ZERO_SHOT_AND_CALIBRATION_GUIDE.md`](docs/ZERO_SHOT_AND_CALIBRATION_GUIDE.md) | Zero-shot unseen C-rate analysis ($1.3338905\text{C}$) & horizon criteria ($K=50$ vs $100$ vs $500$) |
 | [`docs/MODEL_GUIDE.md`](docs/MODEL_GUIDE.md) | Model capabilities, horizon guide ($K=100$ vs $500$), and API usage |
 | [`docs/PRESENTATION.md`](docs/PRESENTATION.md) | Faculty technical presentation dossier |
 | [`docs/REPORT.md`](docs/REPORT.md) | Comprehensive 1,500-cycle pilot report |
