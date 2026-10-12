@@ -1,0 +1,33 @@
+[1C] Starting FIXED_SET 1500-cycle run (chunk=50, rtol=1e-06, atol=1e-06)...
+[1C] Chunk done: 50/1500 cycles (3.3%) in 93.5s (1.87 s/cyc) | Q=4.81953 Ah
+[1C] Chunk done: 100/1500 cycles (6.7%) in 119.0s (2.38 s/cyc) | Q=4.79962 Ah
+[1C] Chunk done: 150/1500 cycles (10.0%) in 135.3s (2.71 s/cyc) | Q=4.78133 Ah
+[1C] Chunk done: 200/1500 cycles (13.3%) in 167.3s (3.35 s/cyc) | Q=4.76392 Ah
+[1C] Chunk done: 250/1500 cycles (16.7%) in 294.5s (5.89 s/cyc) | Q=4.74721 Ah
+[1C] Chunk done: 300/1500 cycles (20.0%) in 184.1s (3.68 s/cyc) | Q=4.73058 Ah
+[1C] Chunk done: 350/1500 cycles (23.3%) in 156.6s (3.13 s/cyc) | Q=4.71440 Ah
+[1C] Chunk done: 400/1500 cycles (26.7%) in 161.7s (3.23 s/cyc) | Q=4.69846 Ah
+[1C] Chunk done: 450/1500 cycles (30.0%) in 161.3s (3.23 s/cyc) | Q=4.68270 Ah
+[1C] Chunk done: 500/1500 cycles (33.3%) in 161.2s (3.22 s/cyc) | Q=4.66709 Ah
+[1C] Chunk done: 550/1500 cycles (36.7%) in 172.2s (3.44 s/cyc) | Q=4.65162 Ah
+[1C] Chunk done: 600/1500 cycles (40.0%) in 232.8s (4.66 s/cyc) | Q=4.63629 Ah
+[1C] Chunk done: 650/1500 cycles (43.3%) in 160.1s (3.20 s/cyc) | Q=4.62100 Ah
+[1C] Chunk done: 700/1500 cycles (46.7%) in 76.2s (1.52 s/cyc) | Q=4.60581 Ah
+[1C] Chunk done: 750/1500 cycles (50.0%) in 87.1s (1.74 s/cyc) | Q=4.59070 Ah
+[1C] Chunk done: 800/1500 cycles (53.3%) in 73.3s (1.47 s/cyc) | Q=4.57565 Ah
+[1C] Chunk done: 850/1500 cycles (56.7%) in 70.8s (1.42 s/cyc) | Q=4.56066 Ah
+[1C] Chunk done: 900/1500 cycles (60.0%) in 72.8s (1.46 s/cyc) | Q=4.54571 Ah
+[1C] Chunk done: 950/1500 cycles (63.3%) in 71.7s (1.43 s/cyc) | Q=4.53081 Ah
+[1C] Chunk done: 1000/1500 cycles (66.7%) in 74.7s (1.49 s/cyc) | Q=4.51595 Ah
+[1C] Chunk done: 1050/1500 cycles (70.0%) in 71.9s (1.44 s/cyc) | Q=4.50111 Ah
+[1C] Chunk done: 1100/1500 cycles (73.3%) in 65.2s (1.30 s/cyc) | Q=4.48631 Ah
+[1C] Chunk done: 1150/1500 cycles (76.7%) in 79.7s (1.59 s/cyc) | Q=4.47154 Ah
+[1C] Chunk done: 1200/1500 cycles (80.0%) in 76.1s (1.52 s/cyc) | Q=4.45678 Ah
+[1C] Chunk done: 1250/1500 cycles (83.3%) in 70.0s (1.40 s/cyc) | Q=4.44204 Ah
+[1C] Chunk done: 1300/1500 cycles (86.7%) in 65.9s (1.32 s/cyc) | Q=4.42733 Ah
+[1C] Chunk done: 1350/1500 cycles (90.0%) in 67.6s (1.35 s/cyc) | Q=4.41262 Ah
+[1C] Chunk done: 1400/1500 cycles (93.3%) in 67.1s (1.34 s/cyc) | Q=4.39794 Ah
+[1C] Chunk done: 1450/1500 cycles (96.7%) in 65.6s (1.31 s/cyc) | Q=4.38327 Ah
+[1C] Chunk done: 1500/1500 cycles (100.0%) in 69.6s (1.39 s/cyc) | Q=4.36861 Ah
+
+[1C] FINISHED: complete (1500/1500 cycles) in 3445.7s (57.4 min)
