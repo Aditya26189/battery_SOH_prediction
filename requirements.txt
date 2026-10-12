@@ -1,0 +1,14 @@
+# Core simulation engine
+pybamm>=25.10
+
+# Scientific computing
+numpy>=1.24
+pandas>=2.0
+scipy>=1.11
+scikit-learn>=1.3
+
+# Plotting
+matplotlib>=3.7
+
+# Markdown tables (used in analysis reports)
+tabulate>=0.9

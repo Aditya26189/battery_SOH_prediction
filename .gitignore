@@ -1,4 +1,40 @@
-*.pkl
+# ──────────────────────── Python ────────────────────────
 __pycache__/
-*.pyc
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ──────────────────── Virtual Environments ──────────────
 .venv/
+venv/
+env/
+
+# ──────────────────── Serialized / Binary ───────────────
+*.pkl
+*.pickle
+
+# ──────────────────── IDE / Editor ──────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ──────────────────── OS Artifacts ──────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ──────────────────── Project Specific ──────────────────
+# Simulation state checkpoints (35 MB each)
+data/pilot_1500/*_state.pkl
+
+# Logs from simulation runs
+data/pilot_1500/log_*.txt
+data/pilot_1500/err_*.txt
+
+# Archive directory — legacy/experimental scripts kept locally
+archive/
