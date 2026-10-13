@@ -38,3 +38,6 @@ data/pilot_1500/err_*.txt
 
 # Archive directory — legacy/experimental scripts kept locally
 archive/
+
+# Temporary scratch scripts
+scratch/
