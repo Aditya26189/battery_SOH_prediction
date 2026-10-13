@@ -94,7 +94,7 @@ SEI diffusivity/thickness names the model reads: ['Primary: Initial SEI thicknes
 
 ---
 
-## 6. Root Cause: Why Pilot and Old Sweep Differ [identified: measured & inferred]
+## 6. Root Cause: Why Pilot and Old Sweep Differ [hypothesised: measured & inferred]
 
 The pilot and the old 50-cycle sweep diverge because of two structural model discrepancies between the pasted pilot script and the environment that generated the old Kaggle sweep:
 
@@ -138,3 +138,4 @@ The pasted pilot script used Script B (a short 2-cycle BoL template with half-di
 1. **Retire the old 50-cycle Kaggle sweep (`sweep.npz`)**: It was produced under an unrecoverable older remote environment with mismatched positive-electrode options and unknown SEI thickness scaling.
 2. **Align the model definition with `results/FIXED_SET.md`**: Update `model_def.py` to use the canonical options (`('swelling only', 'swelling only')`, `('stress-driven', 'stress-driven')`), modern SEI names (`SEI solvent diffusivity`), and the intended rate constants (`3e-6`, `2.4e-8`, `1.7778e-07`).
 3. **Decision needed**: Confirm whether you would like to run a verified 50-cycle / 1500-cycle calibration run under the canonical `FIXED_SET.md` configuration.
+

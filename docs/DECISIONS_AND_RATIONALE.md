@@ -95,8 +95,8 @@ To compare exact quantities without guessing, [`model_def_fixedset.py`](file:///
 | | 2.0C | 2.5076% | 0.4965% | -2.0111 pp |
 
 #### Critical Conclusions from Like-with-Like Test
-1. **Positive Electrode Mechanics Verified**: Positive LAM matched the old Kaggle CSVs almost identically across both C-rates (**0.3751% vs 0.3736%**; **0.3758% vs 0.3737%**). This conclusively proves that the positive electrode mechanics and rate constant (`1.7778e-07`) in `FIXED_SET.md` are the exact ones that ran on Kaggle.
-2. **SEI Diffusivity Impact**: In `FIXED_SET.md`, when the intended diffusivities (`2.5e-24` / `9.5e-22`) are read by modern PyBaMM, SEI growth is strongly suppressed (LLI is only 0.40% at 0.2C vs 1.33% in Kaggle). This explained why fade in `FIXED_SET.md` is 0.21% over 50 cycles.
+1. **Positive Electrode Mechanics Verified**: Positive LAM matched the old Kaggle CSVs almost identically across both C-rates (**0.3751% vs 0.3736%**; **0.3758% vs 0.3737%**). This is strong empirical evidence that the positive electrode mechanics and rate constant (`1.7778e-07`) in `FIXED_SET.md` are the same values that ran on Kaggle — though negative LAM ($8 \times$ different) and LLI ($3.3 \times$ different) remain unexplained.
+2. **SEI Diffusivity Impact**: In `FIXED_SET.md`, when the intended diffusivities (`2.5e-24` / `9.5e-22`) are read by modern PyBaMM, SEI growth is strongly suppressed (LLI is only 0.40% at 0.2C vs 1.33% in Kaggle). This is the leading hypothesis for why fade in `FIXED_SET.md` is 0.21% over 50 cycles. The exact Kaggle environment cannot be fully reconstructed from available information.
 
 ---
 
