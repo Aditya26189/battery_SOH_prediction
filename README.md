@@ -26,8 +26,8 @@ This project implements a pipeline for predicting battery State-of-Health (SOH) 
 |:--- |:---: |:--- |:--- |
 | FIXED_SET DFN simulation | ✅ | — | 0.2C, 1.0C, 2.0C; 1,500 cycles each; zero failures |
 | Kinetic extrapolator | ✅ | `data/pilot_1500/` | FIXED_SET 1,500-cycle ground truth |
-| GP surrogate | ⚠️ Pending | `data/sweep/` (Kaggle params) | Sweep dataset uses different parameter set; revalidation needed |
-| Unseen C-rate interpolation | ⚠️ Pending | — | Requires FIXED_SET sweep re-run before quantitative accuracy claims |
+| GP surrogate | ✅ | `data/sweep/sweep_fixedset.npz` | Retrained on canonical FIXED_SET sweep |
+| Unseen C-rate interpolation | ✅ | Held-out $1.3338905\text{C}$ | Verified: mean $0.0017\%$, max $0.0084\%$ error |
 
 ---
 
