@@ -79,17 +79,30 @@ def main():
     diff_gp = np.abs(soh_gp_comp[:n_have] - soh_true)
     rel_err_gp = (diff_gp / soh_true) * 100
 
-    print(f"\n{'Cycle':<8} | {'Physical DFN':<14} | {'GP Pred':<14} | {'Abs Error':<12} | {'Rel Error %':<10}")
-    print("-" * 68)
-    sample_points = [1, 10, 25, 50, 75, 100, 150, 200, 300, 400, 500, 750, 1000, 1250, 1500]
-    for pt in sample_points:
-        if pt <= n_have:
-            idx = pt - 1
-            print(f"{pt:<8} | {soh_true[idx]:<14.5f} | {soh_gp_comp[idx]:<14.5f} | {diff_gp[idx]:<12.6f} | {rel_err_gp[idx]:<10.4f}%")
-
-    print("-" * 68)
-    print(f"Mean Relative Error (Cycles 1..{n_have}): {np.mean(rel_err_gp):.4f}%")
-    print(f"Max Relative Error (Cycles 1..{n_have}):  {np.max(rel_err_gp):.4f}%")
+    if soh_extrap_100 is not None:
+        diff_ex100 = np.abs(soh_extrap_100[:n_have] - soh_true)
+        rel_err_ex100 = (diff_ex100 / soh_true) * 100
+        print(f"\n{'Cycle':<6} | {'DFN Truth':<11} | {'GP ZeroShot':<11} | {'GP Err%':<8} | {'K=100 Pred':<11} | {'K=100 Err%':<10}")
+        print("-" * 72)
+        sample_points = [1, 10, 25, 50, 75, 100, 150, 200, 300, 400, 500, 750, 1000, 1250, 1500]
+        for pt in sample_points:
+            if pt <= n_have:
+                idx = pt - 1
+                print(f"{pt:<6} | {soh_true[idx]:<11.5f} | {soh_gp_comp[idx]:<11.5f} | {rel_err_gp[idx]:<8.4f}% | {soh_extrap_100[idx]:<11.5f} | {rel_err_ex100[idx]:<10.4f}%")
+        print("-" * 72)
+        print(f"Mean Error (Cycles 1..{n_have}): GP = {np.mean(rel_err_gp):.4f}% | K=100 = {np.mean(rel_err_ex100):.4f}%")
+        print(f"Max  Error (Cycles 1..{n_have}): GP = {np.max(rel_err_gp):.4f}% | K=100 = {np.max(rel_err_ex100):.4f}%")
+    else:
+        print(f"\n{'Cycle':<8} | {'Physical DFN':<14} | {'GP Pred':<14} | {'Abs Error':<12} | {'Rel Error %':<10}")
+        print("-" * 68)
+        sample_points = [1, 10, 25, 50, 75, 100, 150, 200, 300, 400, 500, 750, 1000, 1250, 1500]
+        for pt in sample_points:
+            if pt <= n_have:
+                idx = pt - 1
+                print(f"{pt:<8} | {soh_true[idx]:<14.5f} | {soh_gp_comp[idx]:<14.5f} | {diff_gp[idx]:<12.6f} | {rel_err_gp[idx]:<10.4f}%")
+        print("-" * 68)
+        print(f"Mean Relative Error (Cycles 1..{n_have}): {np.mean(rel_err_gp):.4f}%")
+        print(f"Max Relative Error (Cycles 1..{n_have}):  {np.max(rel_err_gp):.4f}%")
 
     # Generate Publication Plot
     os.makedirs(os.path.dirname(OUT_FIG), exist_ok=True)

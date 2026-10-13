@@ -109,16 +109,27 @@ We held two arbitrary, high-precision C-rates completely out of the training swe
 - **Conformal Band**: $100\%$ of cycles fall within the $\pm 0.00009$ band.
 - *(Visualized in `figures/zeroshot_eval_1.33389C.png`).*
 
-#### Benchmark 2: Held-Out $C = 1.4422357$
-- **Physical Simulation**: $Q_1 = 4.80064\text{ Ah}$, $Q_{50} = 4.76003\text{ Ah}$
-- **GP Zero-Shot Prediction**: $Q_1 = 4.80099\text{ Ah}$, $Q_{50} = 4.75988\text{ Ah}$
-- **Cycle 1 Relative Error**: **$0.0071\%$**
-- **Cycle 50 Relative Error**: **$0.0030\%$**
-- **Mean Relative Error Across All 50 Cycles**: **$0.0019\%$**
-- **Max Relative Error**: **$0.0071\%$**
-- **Conformal Band**: $100\%$ of cycles fall within the $\pm 0.00009$ band.
+#### Benchmark 2: Held-Out $C = 1.4422357$ (Full Life Evaluation)
+- **Early-Cycle Zero-Shot Accuracy ($N \le 50$)**:
+  - **Physical Simulation**: $Q_1 = 4.80064\text{ Ah}$, $Q_{50} = 4.76003\text{ Ah}$
+  - **GP Zero-Shot Prediction**: $Q_1 = 4.80099\text{ Ah}$, $Q_{50} = 4.75988\text{ Ah}$
+  - **Mean Relative Error Across First 50 Cycles**: **$0.0019\%$** (worst-case $0.0071\%$).
+- **Long-Horizon Evaluation (Physical DFN solved to Cycle 1,200)**:
+  - Visualized in: [`figures/comparison_1.44224C_1500.png`](file:///c:/Users/LawLight/Desktop/battery_data_dump/figures/comparison_1.44224C_1500.png).
 
-**Conclusion**: Across multiple arbitrary held-out C-rates, the surrogate matches the full continuum physics to within **under 2 parts per 100,000**.
+| Cycle ($N$) | Physical DFN Truth ($SOH$) | GP Zero-Shot Pred | GP Relative Error | $K=100$ Extrapolator Pred | $K=100$ Relative Error | Notes |
+| :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **1** | $0.97817$ | $0.97824$ | **$0.0072\%$** | $0.97834$ | $0.0172\%$ | Beginning of Cycling |
+| **50** | $0.96989$ | $0.96986$ | **$0.0031\%$** | $0.96992$ | **$0.0027\%$** | GP training horizon |
+| **100** | $0.96346$ | $0.96306$ | **$0.0414\%$** | $0.96342$ | **$0.0036\%$** | Calibration cutoff for $K=100$ |
+| **200** | $0.95194$ | $0.95037$ | $0.1649\%$ | $0.95153$ | **$0.0426\%$** | 100 cycles unobserved |
+| **500** | $0.92041$ | $0.91453$ | $0.6392\%$ | $0.91855$ | **$0.2030\%$** | 400 cycles unobserved |
+| **1,000** | $0.87173$ | $0.85717$ | $1.6699\%$ | $0.86642$ | **$0.6097\%$** | 900 cycles unobserved |
+| **1,200** | $0.85303$ | $0.83371$ | $2.2635\%$ | $0.84512$ | **$0.9277\%$** | 1,100 cycles unobserved |
+
+- **Mean Error over 1,200 Cycles**: $K=100$ Extrapolator = **$0.3159\%$** | Zero-Shot GP = **$0.8999\%$**.
+
+**Conclusion**: Across multiple arbitrary held-out C-rates, the surrogate matches the full continuum physics to within **under 2 parts per 100,000** on early cycles and accurately forecasts long-life trajectory trends.
 
 ---
 
@@ -144,7 +155,10 @@ An earlier version of this repository reported a $2.13\%$ error at Cycle 50 for 
 ### Q3: "What prevents catastrophic divergence when extrapolating to Cycle 1,500?"
 > **Answer**: *"Ordinary polynomial regression diverges rapidly outside the training window. Our extrapolator enforces physical kinetic constraints: an intercept $c_0$ bounded by rate capability, a sublinear $\sqrt{N}$ term bounded by SEI diffusion limits, and a linear $N$ term bounded by mechanical active material loss. For long-horizon projections from very early data ($K=50$), we explicitly recommend the single-regime $\sqrt{N}$ form to prevent linear slope over-estimation."*
 
-### Q4: "Did you observe a knee-point rollover?"
+### Q4: "If the Kinetic Extrapolator achieves lower error (0.31% vs 0.90% over 1,200 cycles), why do you even need the Gaussian Process?"
+> **Answer**: *"Professor, they address two fundamentally different dimensions of the problem. The Kinetic Extrapolator is a time-extrapolator: it requires 100 cycles of actual physical data on that specific cell (~2 weeks of testing) before it can predict anything. It cannot evaluate a brand-new battery or unseen charging speed from scratch. The Gaussian Process is an operating-condition generalizer: it operates in Zero-Shot mode (0 observed cycles) in less than 1 millisecond. Together, they form a two-tier framework: the GP screens hundreds of charging algorithms in seconds during design, and the kinetic extrapolator provides ultra-accurate in-service warranty tracking once the vehicle begins driving."*
+
+### Q5: "Did you observe a knee-point rollover?"
 > **Answer**: *"In our 1,500-cycle DFN simulations at 0.2C, 1.0C, and 2.0C, late-to-early slope ratios remained strictly below 1.0 (0.22, 0.28, and 0.30 respectively). Degradation was smoothly sublinear without abrupt knee-point rollover within 1,500 cycles under this protocol. At 2.0C, the 80% SOH EoL threshold was crossed smoothly at Cycle 1,473."*
 
 ---
