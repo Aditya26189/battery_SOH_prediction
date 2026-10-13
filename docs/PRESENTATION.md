@@ -126,10 +126,11 @@ We held two arbitrary, high-precision C-rates completely out of the training swe
 | **500** | $0.92041$ | $0.91453$ | $0.6392\%$ | $0.91855$ | **$0.2030\%$** | 400 cycles unobserved |
 | **1,000** | $0.87173$ | $0.85717$ | $1.6699\%$ | $0.86642$ | **$0.6097\%$** | 900 cycles unobserved |
 | **1,200** | $0.85303$ | $0.83371$ | $2.2635\%$ | $0.84512$ | **$0.9277\%$** | 1,100 cycles unobserved |
+| **1,500** | **$0.82921$** | **$0.80097$** | **$3.4058\%$** | **$0.81567$** | **$1.6331\%$** | Full 1,400 unobserved cycles |
 
-- **Mean Error over 1,200 Cycles**: $K=100$ Extrapolator = **$0.3159\%$** | Zero-Shot GP = **$0.8999\%$**.
+- **Mean Error over Full 1,500-Cycle Lifetime**: $K=100$ Extrapolator = **$0.5045\%$** | Zero-Shot GP = **$1.2823\%$**.
 
-**Conclusion**: Across multiple arbitrary held-out C-rates, the surrogate matches the full continuum physics to within **under 2 parts per 100,000** on early cycles and accurately forecasts long-life trajectory trends.
+**Conclusion**: Across multiple arbitrary held-out C-rates, the surrogate matches the full continuum physics to within **under 2 parts per 100,000** on early cycles and accurately forecasts full-life 1,500-cycle degradation ($0.50\%$ mean error for $K=100$).
 
 ---
 

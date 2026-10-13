@@ -89,7 +89,7 @@ They address two orthogonal engineering challenges:
 - **Architecture**: Three-coefficient GP emulator mapping $\log_{10}(C) \mapsto [c_0, c_1, c_2]$ using Matérn-5/2 kernels, with Leave-One-Out (LOO) conformal confidence intervals ($q = \pm 0.00010$).
 - **Zero-Shot Validation**:
   - $C = 1.3338905$: Mean error $0.0017\%$ (Cycles 1–50).
-  - $C = 1.4422357$: Mean error $0.0019\%$ (Cycles 1–50); Mean error $0.89\%$ (Cycles 1–1200). Validation plot: [`figures/comparison_1.44224C_1500.png`](file:///c:/Users/LawLight/Desktop/battery_data_dump/figures/comparison_1.44224C_1500.png).
+  - $C = 1.4422357$: Mean error $0.0019\%$ (Cycles 1–50); Full 1,500-cycle lifetime mean error: $0.50\%$ ($K=100$ Extrapolator), $1.28\%$ (Zero-Shot GP). Validation plot: [`figures/comparison_1.44224C_1500.png`](file:///c:/Users/LawLight/Desktop/battery_data_dump/figures/comparison_1.44224C_1500.png).
 
 ---
 

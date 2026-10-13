@@ -28,7 +28,7 @@ This project implements a pipeline for predicting battery State-of-Health (SOH) 
 | Kinetic extrapolator | ✅ | `data/pilot_1500/` | FIXED_SET 1,500-cycle ground truth ($0.65\%$ error from $K=100$) |
 | GP surrogate | ✅ | `data/sweep/sweep_fixedset.npz` | Trained on 60-point canonical FIXED_SET sweep |
 | Unseen C-rate ($1.33389\text{C}$) | ✅ | Held-out test simulation | Mean $0.0017\%$, max $0.0084\%$ error ($100\%$ conformal coverage) |
-| Unseen C-rate ($1.44224\text{C}$) | ✅ | Held-out test simulation | Mean $0.0019\%$ (first 50 cyc); $0.31\%$ mean error across 1,200 cyc ($K=100$) |
+| Unseen C-rate ($1.44224\text{C}$) | ✅ | Held-out 1,500-cycle simulation | Mean $0.0019\%$ (first 50 cyc); $0.50\%$ mean error across full 1,500 cyc ($K=100$) |
 
 ---
 
