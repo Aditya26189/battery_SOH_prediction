@@ -215,4 +215,4 @@ def plot_diagnostics(crates, N, Y, em, scores, q,
     plt.tight_layout()
     plt.savefig(save_path, bbox_inches="tight")
     plt.close()
-    print(f"Diagnostic plot → {save_path}")
+    print(f"Diagnostic plot -> {save_path}")

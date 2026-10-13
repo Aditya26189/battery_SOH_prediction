@@ -69,24 +69,28 @@ battery_SOH_prediction/
 │   ├── model.py                    #   DFN model definition (FIXED_SET spec)
 │   ├── simulator.py                #   Chunked simulation runner (rtol=atol=1e-6)
 │   ├── extrapolator.py             #   Hold-out extrapolation benchmarking
-│   └── gp_surrogate.py             #   GP emulator (pending FIXED_SET revalidation)
+│   └── gp_surrogate.py             #   GP emulator (revalidated on FIXED_SET)
 │
 ├── scripts/                        # CLI entry-point scripts
 │   ├── run_simulation.py           #   Run a new PyBaMM simulation
+│   ├── run_fixedset_sweep.py       #   Resumable FIXED_SET sweep runner
 │   ├── run_analysis.py             #   Run extrapolation analysis
-│   ├── run_surrogate.py            #   Train GP surrogate
-│   ├── compare_model_vs_algo.py    #   Model vs Algorithm comparison plot
-│   └── prepare_sweep.py            #   Aggregate raw CSVs → sweep.npz
+│   ├── run_surrogate.py            #   Train GP surrogate + conformal bands
+│   ├── eval_zeroshot.py            #   Zero-shot interpolation benchmark
+│   └── compare_model_vs_algo.py    #   Model vs Algorithm comparison plot
 │
 ├── data/
-│   ├── sweep/                      #   60-point C-rate sweep (Kaggle params — see note)
-│   │   └── *.csv                   #   Raw 50-cycle degradation CSVs
+│   ├── sweep/                      #   Packaged sweep datasets (sweep_fixedset.npz)
+│   ├── sweep_fixedset/             #   Raw 50-cycle FIXED_SET CSVs (60 conditions)
 │   └── pilot_1500/                 #   FIXED_SET 1,500-cycle validated data
 │       ├── {c}C_cycles.csv         #   Per-C-rate trajectory (0.2C, 1.0C, 2.0C)
 │       └── analysis/               #   Holdout errors, trajectory summary, pilot.npz
 │
-├── figures/                        # Publication plots (FIXED_SET data)
-│   └── comparison_1C_fit500.png    #   K=500 algorithm vs model comparison
+├── figures/                        # Publication plots (FIXED_SET validated data)
+│   ├── comparison_1C_fit100.png    #   K=100 algorithm vs physics comparison
+│   ├── comparison_1C_fit500.png    #   K=500 algorithm vs physics comparison
+│   ├── emulator_validation.png     #   4-panel GP diagnostics + conformal band
+│   └── zeroshot_eval_1.33389C.png  #   Zero-shot physical evaluation
 │
 ├── archive/                        # Retired files (old parameter set)
 │   ├── figures/                    #   fig1–fig3 from pre-FIXED_SET pilot
@@ -94,7 +98,8 @@ battery_SOH_prediction/
 │   └── sweep_kaggle_old_params.npz #   Old 50-cycle GP training data
 │
 ├── docs/                           # Technical documentation
-│   ├── ZERO_SHOT_AND_CALIBRATION_GUIDE.md  # Horizon selection & cross-dataset analysis
+│   ├── PRESENTATION.md             #   Faculty technical dossier & defense guide
+│   ├── ZERO_SHOT_AND_CALIBRATION_GUIDE.md  # Horizon selection & zero-shot validation
 │   ├── MODEL_GUIDE.md              #   Capabilities, horizon guide, API usage
 │   ├── DECISIONS_AND_RATIONALE.md  #   Full decision log incl. parameter investigation
 │   └── DIAG_REPORT.md             #   Parameter ablation diagnostics
@@ -174,6 +179,7 @@ Coefficients fitted via ordinary least squares on the first $K$ cycles, then ext
 
 | Document | Description |
 |:---------|:-----------|
+| [`docs/PRESENTATION.md`](docs/PRESENTATION.md) | **Faculty Technical Dossier**: 1-week vs 1-year prognosis rationale, horizon trade-offs, and defense Q&A |
 | [`docs/ZERO_SHOT_AND_CALIBRATION_GUIDE.md`](docs/ZERO_SHOT_AND_CALIBRATION_GUIDE.md) | Calibration horizon selection; cross-dataset evaluation at 1.3338905C |
 | [`docs/MODEL_GUIDE.md`](docs/MODEL_GUIDE.md) | Capabilities, horizon guide, API usage |
 | [`docs/DECISIONS_AND_RATIONALE.md`](docs/DECISIONS_AND_RATIONALE.md) | Full decision log including parameter set investigation |
