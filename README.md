@@ -103,7 +103,7 @@ battery_SOH_prediction/
 │   ├── ZERO_SHOT_AND_CALIBRATION_GUIDE.md  # Horizon selection & zero-shot validation
 │   ├── MODEL_GUIDE.md              #   Capabilities, horizon guide, API usage
 │   ├── DECISIONS_AND_RATIONALE.md  #   Full decision log incl. parameter investigation
-│   └── DIAG_REPORT.md             #   Parameter ablation diagnostics
+│   └── CHANGES_TO_ORIGINAL_CODE.md #   Audit of modifications from original researcher script
 │
 ├── requirements.txt
 ├── LICENSE
@@ -184,7 +184,7 @@ Coefficients fitted via ordinary least squares on the first $K$ cycles, then ext
 | [`docs/ZERO_SHOT_AND_CALIBRATION_GUIDE.md`](docs/ZERO_SHOT_AND_CALIBRATION_GUIDE.md) | Calibration horizon selection; cross-dataset evaluation at 1.3338905C |
 | [`docs/MODEL_GUIDE.md`](docs/MODEL_GUIDE.md) | Capabilities, horizon guide, API usage |
 | [`docs/DECISIONS_AND_RATIONALE.md`](docs/DECISIONS_AND_RATIONALE.md) | Full decision log including parameter set investigation |
-| [`docs/DIAG_REPORT.md`](docs/DIAG_REPORT.md) | Parameter ablation diagnostics |
+| [`docs/CHANGES_TO_ORIGINAL_CODE.md`](docs/CHANGES_TO_ORIGINAL_CODE.md) | **Technical Audit**: Detailed modifications from original research script to production model |
 
 ---
 

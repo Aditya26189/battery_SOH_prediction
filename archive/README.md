@@ -41,7 +41,7 @@ The `battery_data_dump` repository contains **two incompatible parameter configu
 
 - **Do not delete**: These files document the diagnostic investigation (see `docs/DECISIONS_AND_RATIONALE.md §Stages 1–3`).
 - **Do not cite**: These results should not appear in publications, reports, or benchmarks.
-- **Reference only for provenance**: If tracing why old Kaggle and current FIXED_SET numbers differ, use these alongside `docs/DIAG_REPORT.md`.
+- **Reference only for provenance**: If tracing why old Kaggle and current FIXED_SET numbers differ, use these alongside `docs/CHANGES_TO_ORIGINAL_CODE.md`.
 
 ---
 
