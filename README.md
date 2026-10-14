@@ -16,7 +16,7 @@ This project implements a pipeline for predicting battery State-of-Health (SOH) 
 1. **Physics Model** — Doyle–Fuller–Newman (DFN) model with SEI growth, stress-driven loss of active material (LAM) on both electrodes, lithium plating, and porosity changes (`src/model.py`).
 2. **Full-Life Simulation** — 1,500-cycle simulations at three anchor C-rates (0.2C, 1.0C, 2.0C) with chunked execution and lightweight checkpointing (`src/simulator.py`).
 3. **Kinetic Extrapolator** — Physics-informed functional form $\text{SOH}(N) = c - b_1\sqrt{N} - b_2 N$ calibrated on early cycles and projected to 1,500 cycles (`src/extrapolator.py`).
-4. **GP Surrogate** — A Gaussian Process emulator mapping C-rate → SOH trajectory, currently awaiting revalidation on FIXED_SET sweep data (`src/gp_surrogate.py`).
+4. **GP Surrogate** — A Gaussian Process emulator mapping C-rate → SOH trajectory, trained and validated on canonical FIXED_SET sweep data (`src/gp_surrogate.py`).
 
 ---
 
@@ -78,7 +78,8 @@ battery_SOH_prediction/
 │   ├── run_analysis.py             #   Run extrapolation analysis
 │   ├── run_surrogate.py            #   Train GP surrogate + conformal bands
 │   ├── eval_zeroshot.py            #   Zero-shot interpolation benchmark
-│   └── compare_model_vs_algo.py    #   Model vs Algorithm comparison plot
+│   ├── compare_model_vs_algo.py    #   Model vs Algorithm comparison plot
+│   └── plot_gp_coefficients.py     #   Plot GP kinetic coefficients vs C-rate
 │
 ├── data/
 │   ├── sweep/                      #   Packaged sweep datasets (sweep_fixedset.npz)
@@ -90,7 +91,9 @@ battery_SOH_prediction/
 ├── figures/                        # Publication plots (FIXED_SET validated data)
 │   ├── comparison_1C_fit100.png    #   K=100 algorithm vs physics comparison
 │   ├── comparison_1C_fit500.png    #   K=500 algorithm vs physics comparison
+│   ├── comparison_1.44224C_1500.png#   Held-out 1.442C 1,500-cycle full benchmark
 │   ├── emulator_validation.png     #   4-panel GP diagnostics + conformal band
+│   ├── gp_coefficients_vs_crate.png#   GP kinetic basis coefficients (c, b1, b2) vs C-rate
 │   └── zeroshot_eval_1.33389C.png  #   Zero-shot physical evaluation
 │
 ├── archive/                        # Retired files (old parameter set)

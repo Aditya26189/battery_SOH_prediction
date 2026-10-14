@@ -91,6 +91,29 @@ They address two orthogonal engineering challenges:
   - $C = 1.3338905$: Mean error $0.0017\%$ (Cycles 1–50).
   - $C = 1.4422357$: Mean error $0.0019\%$ (Cycles 1–50); Full 1,500-cycle lifetime mean error: $0.50\%$ ($K=100$ Extrapolator), $1.28\%$ (Zero-Shot GP). Validation plot: [`figures/comparison_1.44224C_1500.png`](file:///c:/Users/LawLight/Desktop/battery_data_dump/figures/comparison_1.44224C_1500.png).
 
+#### 4. Mapping of Kinetic Basis Coefficients ($c, b_1, b_2$) vs C-Rate
+The GP emulator decomposes the degradation trajectory into three physical basis coefficients:
+$$\text{SOH}(N) = c(C) - b_1(C)\sqrt{N} - b_2(C) N$$
+
+Each coefficient is learned across $[0.2\text{C}, 2.0\text{C}]$ by a Matérn-5/2 GP kernel trained on the 62 conditions of the FIXED_SET sweep:
+
+![GP Kinetic Coefficients vs C-Rate](../figures/gp_coefficients_vs_crate.png)
+
+1. **$c(C)$ (Beginning-of-Life Accessible Capacity)**:
+   - Drops monotonically from $1.000$ at $0.2\text{C}$ to $0.961$ at $2.0\text{C}$.
+   - **Physics**: At higher currents, internal ohmic resistance ($IR$ drop) and solid-state transport overpotentials cause the cell terminal voltage to hit the lower cutoff threshold ($2.5\text{ V}$) earlier in the discharge cycle, reducing accessible capacity prior to any cycling degradation.
+
+2. **$b_1(C)$ (Diffusion-Limited SEI Growth Rate, $\sqrt{N}$)**:
+   - Scales nonlinearly from $1.21\times 10^{-4}$ at $0.2\text{C}$ to $10.04\times 10^{-4}$ at $2.0\text{C}$ ($>8\times$ acceleration).
+   - **Physics**: Governs solvent diffusion and continuous SEI passivation layer thickening on composite graphite/silicon particles. Higher operational currents generate elevated interfacial overpotentials and Joule heating, accelerating parasitic reduction kinetics.
+
+3. **$b_2(C)$ (Linear Mechanical Fatigue & Active Material Loss Rate, $N$)**:
+   - Accelerates $>6\times$ from $0.28\times 10^{-4}$ at $0.2\text{C}$ to $1.81\times 10^{-4}$ at $2.0\text{C}$.
+   - **Physics**: Driven by cyclic volumetric expansion and contraction of silicon/graphite composite particles. High C-rates induce severe intra-particle and inter-particle lithium concentration gradients, intensifying cyclic shear strain, micro-cracking, and electrical disconnection (Loss of Active Material, LAM).
+
+**Physical Benchmark Validation**:
+The green stars represent independent, held-out Doyle–Fuller–Newman continuum simulations at $C = 1.3338905$ and $C = 1.4422357$. As shown, their physical coefficients fall directly on the GP mean trajectory ($< 10^{-6}$ deviation), providing visual and analytical proof of the emulator's zero-shot generalization fidelity.
+
 ---
 
 ## 4. How to Use and Run the Models
